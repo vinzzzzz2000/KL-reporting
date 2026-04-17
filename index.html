@@ -13,6 +13,7 @@
   --border:#2a2a2a;--border-light:#3a3a3a;
   --yellow:#E6FF00;--yellow-dim:#c8dd00;--yellow-glow:rgba(230,255,0,0.12);--yellow-glow2:rgba(230,255,0,0.06);
   --pink:#e8326e;--pink-dim:#c42a5e;--pink-glow:rgba(232,50,110,0.12);--pink-glow2:rgba(232,50,110,0.06);
+  --teal:#00cc88;
   --font:'DM Sans',system-ui,sans-serif;
   --mono:'JetBrains Mono',monospace;
 }
@@ -22,8 +23,9 @@
   --border:#d4d3cc;--border-light:#c0bfb8;
   --yellow:#2d6a00;--yellow-dim:#1f5200;--yellow-glow:rgba(45,106,0,0.1);--yellow-glow2:rgba(45,106,0,0.05);
   --pink:#c4175a;--pink-dim:#a8104e;--pink-glow:rgba(196,23,90,0.1);--pink-glow2:rgba(196,23,90,0.05);
+  --teal:#008860;
 }
-html{font-size:16px}
+html{font-size:20px}
 body{font-family:var(--font);background:var(--bg);color:var(--text);height:100vh;overflow:hidden;-webkit-font-smoothing:antialiased}
 
 /* orbs */
@@ -76,6 +78,11 @@ h2 em{font-style:normal;color:var(--yellow)}
 .dia-arrow-item{display:flex;flex-direction:column;align-items:center;gap:2px}
 .dia-arrow-label{font-size:0.65rem;color:var(--faint);font-style:italic}
 .dia-arrow-down{font-size:1rem;color:var(--pink);font-weight:700}
+.dia-row-3col{display:grid;grid-template-columns:1fr 1fr 1fr;gap:0.75rem}
+@media(max-width:700px){.dia-row-3col{grid-template-columns:1fr}}
+.dia-source-card{display:flex;flex-direction:column;gap:0.3rem}
+.dia-source-tag{display:inline-block;font-family:var(--mono);font-size:0.65rem;padding:2px 8px;border-radius:4px;font-weight:600;border:1px solid;margin-bottom:0.2rem;align-self:flex-start}
+.dia-source-from{font-size:0.65rem;color:var(--faint);font-style:italic;margin-top:auto;padding-top:0.3rem;border-top:1px solid var(--border)}
 .dia-mod{border-radius:8px;padding:0.6rem 1rem;text-align:center;font-size:0.8rem;font-weight:600}
 .dia-mod-legacy{background:var(--surface2);border:1px solid var(--border);flex:0.4}
 .dia-mod-new{background:var(--yellow-glow2);border:1px solid rgba(230,255,0,0.15);color:var(--yellow);flex:0.6}
@@ -217,12 +224,12 @@ h2 em{font-style:normal;color:var(--yellow)}
 
 <div class="pages-wrap" id="pagesWrap">
 
-<!-- PAGE 1: PE Intro -->
+<!-- PAGE 1: Intro -->
 <div class="snap-page current" id="page1">
   <div class="page-inner">
-    <span class="slide-num">Position reporting</span>
-    <h2>Kyriba for <em>asset managers & PE</em></h2>
-    <p class="lead">Development started in 2021 in partnership with large PE and hedge fund clients. Kyriba connects to custodians and prime brokers, classifies positions, and delivers a unified cash & cash equivalent view.</p>
+    <span class="slide-num">Unified position reporting</span>
+    <h2>Cash, cash equivalent & financial transactions — <em>one view</em></h2>
+    <p class="lead">Kyriba merges bank balances, investment positions, and financial transactions into a single consolidated report. No more reconciling spreadsheets across custodians, prime brokers, and operating banks.</p>
 
     <div class="cap-header">
       <div></div>
@@ -235,23 +242,23 @@ h2 em{font-style:normal;color:var(--yellow)}
     <div class="cap-grid">
       <div class="cap-card">
         <div class="cap-card-icon">↔</div>
-        <div class="cap-card-title">Bank connectivity</div>
-        <div class="cap-card-desc">Connect to custodians and prime brokers to receive MT535 or equivalent position messages</div>
+        <div class="cap-card-title">Connect all sources</div>
+        <div class="cap-card-desc">Bank statements (MT940), custodian positions (MT535), proprietary feeds, and BankAPIs — all into one platform</div>
       </div>
       <div class="cap-card">
         <div class="cap-card-icon">⚑</div>
-        <div class="cap-card-title">Asset classification</div>
-        <div class="cap-card-desc">Set up asset codes and flag which positions qualify as cash or cash equivalent</div>
+        <div class="cap-card-title">Classify & tag</div>
+        <div class="cap-card-desc">Distinguish cash, cash equivalent (MMFs, T-bills, time deposits), and other financial instruments via asset codes</div>
       </div>
       <div class="cap-card">
         <div class="cap-card-icon">⟳</div>
-        <div class="cap-card-title">Parse & integrate</div>
-        <div class="cap-card-desc">Parse statements, control consistency, and integrate positions automatically. BankAPIs enable frequent intraday updates</div>
+        <div class="cap-card-title">Merge & reconcile</div>
+        <div class="cap-card-desc">Combine bank cash balances with investment positions and pending transactions. Automated consistency checks and intraday updates</div>
       </div>
       <div class="cap-card">
         <div class="cap-card-icon">⊞</div>
-        <div class="cap-card-title">Merge with cash balances</div>
-        <div class="cap-card-desc">Combine custodian positions with bank cash balances into a single view via position reporting, bank connectivity cockpit, or custom reports</div>
+        <div class="cap-card-title">Report across everything</div>
+        <div class="cap-card-desc">Consolidated reporting across all banks, custodians, and currencies — with drill-down by entity, type, or counterparty</div>
       </div>
     </div>
 
@@ -269,54 +276,61 @@ h2 em{font-style:normal;color:var(--yellow)}
 <div class="snap-page below" id="page2">
   <div class="page-inner">
     <span class="slide-num">How it works</span>
-    <h2>Bank reporting flows <em>into Kyriba</em></h2>
-    <p class="lead">Banks report in different ways — Kyriba normalises everything into a single cash & cash equivalent position.</p>
+    <h2>Multiple sources, <em>unified reporting</em></h2>
+    <p class="lead">Treasury holds cash in bank accounts, invests in short-term instruments, and runs financial transactions. Kyriba brings it all together.</p>
 
-    <div class="dia-row-label">Banks</div>
-    <div class="dia-row">
-      <div class="dia-group">
-        <div class="dia-group-title">Case 1: Barclays, BNYM, Goldman Sachs, JPMC PB</div>
-        <div class="dia-cols">
-          <div class="dia-card dia-bank">
-            <div class="dia-card-sub">MT940 at subaccount level</div>
-            <div class="dia-card-body"><span class="dia-bullet"></span> Cash</div>
-          </div>
-          <div class="dia-card dia-bank dia-clickable" id="posCard1" onclick="openFormats('swift')">
-            <div class="dia-card-sub">Position summaries at rollup level</div>
-            <div class="dia-card-body"><span class="dia-bullet"></span> Cash equivalent<br><span class="dia-bullet"></span> Other assets</div>
-            <div class="dia-click-hint">click to see format</div>
-          </div>
+    <div class="dia-row-label">What comes in</div>
+    <div class="dia-row dia-row-3col">
+      <div class="dia-card dia-bank dia-source-card">
+        <div class="dia-source-tag" style="background:var(--pink-glow2);color:var(--pink);border-color:rgba(232,50,110,0.15)">Cash</div>
+        <div class="dia-card-sub">Bank statements (MT940, BAI2, camt.053)</div>
+        <div class="dia-card-body">
+          <span class="dia-bullet"></span> Operating account balances<br>
+          <span class="dia-bullet"></span> Settlement accounts<br>
+          <span class="dia-bullet"></span> Prime broker free cash
         </div>
+        <div class="dia-source-from">From: banks, prime brokers</div>
       </div>
-      <div class="dia-group">
-        <div class="dia-group-title" style="color:var(--yellow)">Case 2: JPMC Custody</div>
-        <div class="dia-cols">
-          <div class="dia-card dia-bank dia-clickable" id="posCard2" onclick="openFormats('proprietary')">
-            <div class="dia-card-sub">Position summaries at rollup level</div>
-            <div class="dia-card-body"><span class="dia-bullet"></span> Cash<br><span class="dia-bullet"></span> Cash equivalent<br><span class="dia-bullet"></span> Other assets</div>
-            <div class="dia-click-hint">click to see format</div>
-          </div>
+
+      <div class="dia-card dia-bank dia-source-card dia-clickable" id="posCard1" onclick="openFormats('swift')">
+        <div class="dia-source-tag" style="background:var(--yellow-glow2);color:var(--yellow);border-color:rgba(230,255,0,0.15)">Cash equivalent</div>
+        <div class="dia-card-sub">Position reports (MT535, proprietary)</div>
+        <div class="dia-card-body">
+          <span class="dia-bullet"></span> Money market funds<br>
+          <span class="dia-bullet"></span> Treasury bills (T-bills)<br>
+          <span class="dia-bullet"></span> Time deposits (&lt;90 days)<br>
+          <span class="dia-bullet"></span> Commercial paper<br>
+          <span class="dia-bullet"></span> Repo / reverse repo
         </div>
+        <div class="dia-source-from">From: custodians, prime brokers</div>
+        <div class="dia-click-hint">click to see MT535 format</div>
+      </div>
+
+      <div class="dia-card dia-bank dia-source-card dia-clickable" id="posCard2" onclick="openFormats('proprietary')">
+        <div class="dia-source-tag" style="background:rgba(0,204,136,0.08);color:var(--teal);border-color:rgba(0,204,136,0.15)">Financial transactions</div>
+        <div class="dia-card-sub">Trade confirmations, deal entries</div>
+        <div class="dia-card-body">
+          <span class="dia-bullet"></span> FX spot / forward deals<br>
+          <span class="dia-bullet"></span> Interest rate swaps<br>
+          <span class="dia-bullet"></span> Loan drawdowns / repayments<br>
+          <span class="dia-bullet"></span> Intercompany settlements
+        </div>
+        <div class="dia-source-from">From: TMS, ERP, trading platforms</div>
+        <div class="dia-click-hint">click to see format</div>
       </div>
     </div>
 
     <div class="dia-arrow-row">
-      <div class="dia-arrow-item"><span class="dia-arrow-label">Subaccounts needed</span><span class="dia-arrow-down">↓</span></div>
-      <div class="dia-arrow-item"><span class="dia-arrow-down">↓</span></div>
-      <div class="dia-arrow-item"><span class="dia-arrow-label">Subaccounts not needed</span><span class="dia-arrow-down">↓</span></div>
+      <span class="dia-arrow-down" style="font-size:1.2rem">↓</span>
+      <span class="dia-arrow-down" style="font-size:1.2rem">↓</span>
+      <span class="dia-arrow-down" style="font-size:1.2rem">↓</span>
     </div>
 
     <div class="dia-row-label" style="color:var(--pink)">Kyriba</div>
-    <div class="dia-row">
-      <div class="dia-mod dia-mod-legacy">Bank & Cash Modules</div>
-      <div class="dia-mod dia-mod-new">New Position Reporting module</div>
-    </div>
+    <div class="dia-filter">Ingest, classify, merge — Cash + Cash Equivalent + Financial Transactions</div>
 
     <div class="dia-arrow-row"><span class="dia-arrow-down" style="font-size:1.2rem">↓</span></div>
-    <div class="dia-filter">Filter to only retain Cash & Cash Equivalent <span style="color:var(--faint)">(exclude Other Assets)</span></div>
-
-    <div class="dia-arrow-row"><span class="dia-arrow-down" style="font-size:1.2rem">↓</span></div>
-    <div class="dia-output dia-clickable" onclick="openReport()" style="cursor:pointer">Position Reporting: Cash & Cash Equivalent across all Banks<div class="dia-click-hint" style="margin-top:0.3rem">click to see report</div></div>
+    <div class="dia-output dia-clickable" onclick="openReport()" style="cursor:pointer">Unified Consolidated Report<div class="dia-click-hint" style="margin-top:0.3rem">click to see report</div></div>
   </div>
 </div>
 
